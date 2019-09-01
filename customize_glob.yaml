@@ -1,0 +1,18 @@
+###########################################
+# Global Customizations matching patterns
+#    File is included in configuration.yaml
+###########################################
+
+## Hide all icons in GUI for some sensors as default
+#  sensor.kaffebryggare_*:
+#    hidden: true
+#
+  sensor.kok_fonster_*:
+    hidden: true
+
+  sensor.vardagsrum_fonster_*:
+    hidden: true
+
+#  automation.*:
+#    hidden: true
+#

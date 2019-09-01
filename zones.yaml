@@ -1,0 +1,38 @@
+###########################################
+# zones
+#    Contains zones that should be shown on
+#    map. Used for device_tracker as well.
+###########################################
+
+# Home
+  - name: Home
+    latitude: !secret lat_home
+    longitude: !secret long_home
+    radius: 25
+    icon: mdi:home-variant
+
+# Johans jobb
+  - name: Johans jobb
+    latitude: !secret lat_johan_jobb
+    longitude: !secret long_johan_jobb
+    radius: 250
+    icon: mdi:plane-shield
+
+# Carolines jobb
+  - name: Carolines jobb
+    latitude: !secret lat_caroline_jobb
+    longitude: !secret long_caroline_jobb
+    radius: 250
+    icon: mdi:human-child
+
+# Landet
+  - name: Landet
+    latitude: !secret lat_landet
+    longitude: !secret long_landet
+    icon: mdi:anchor
+
+# Skummeslöv
+  - name: Skummeslov
+    latitude: !secret lat_skummeslov
+    longitude: !secret long_skummeslov
+    icon: mdi:beach
