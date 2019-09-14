@@ -1,0 +1,64 @@
+###########################################
+# kaffetimer
+#    Contains automations for coffe maker
+#    timer functions.
+###########################################
+
+# Start timer and turn on outlet on single click if timer state is idle
+  - alias: Activate coffe timer
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: kaffeknapp
+        event: 1002 # Single click
+    condition:
+      condition: state
+      entity_id: timer.kaffetimer
+      state: 'idle'
+    action:
+      - service: timer.start
+        entity_id: timer.kaffetimer
+      - service: switch.turn_on
+        entity_id: switch.kaffebryggare_switch
+
+# Reset timer duration on double click if timer is active
+  - alias: Reset coffe timer duration
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: kaffeknapp
+          event: 1004 # Double click
+    condition:
+      condition: state
+      entity_id: timer.kaffetimer
+      state: 'active'
+    action:
+      - service: timer.start
+        entity_id: timer.kaffetimer
+
+# Stop timer and turn off outlet on single click or if timer is finished
+  - alias: Deactivate coffe timer
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: kaffeknapp
+          event: 1002 # Single click
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.kaffetimer
+    condition:
+      condition: state
+      entity_id: switch.kaffebryggare_switch
+      state: 'on'
+    action:
+      - service: timer.cancel
+        entity_id: timer.kaffetimer
+      - service: switch.turn_off
+        entity_id: switch.kaffebryggare_switch
