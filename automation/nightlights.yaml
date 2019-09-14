@@ -1,0 +1,183 @@
+###########################################
+# nightlights
+#    Contains all automations concerning
+#    automatic nighit lights
+###########################################
+
+#############
+## Hallway ##
+#############
+## Light in hallway on when motion detected during night time
+  - alias: 'Hallway night light on'
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.rorelse_korridoren
+        to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: light.korridoren
+          state: 'off'
+        - condition: or
+          conditions:
+          - condition: sun
+            before: sunrise
+          - condition: sun
+            after: sunset
+        - condition: or
+          conditions:
+          - condition: time
+            after: '22:30:00'
+            before: '07:30:00'
+            weekday:
+              - mon
+              - tue
+              - wed
+              - thu
+              - sun
+          - condition: time
+            after: '00:00:30'
+            before: '09:00:00'
+            weekday:
+              - sat
+              - sun
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.korridoren
+          brightness: 10
+          color_temp: 454
+
+## Light in hallway off after 10 minutes during night time
+  - alias: 'Hallway night light off'
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.rorelse_korridoren
+        to: 'off'
+        for:
+          minutes: 10
+          seconds: 00
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: light.korridoren
+        state: 'on'
+      - condition: or
+        conditions:
+        - condition: sun
+          before: sunrise
+        - condition: sun
+          after: sunset
+      - condition: or
+        conditions:
+        - condition: time
+          after: '22:30:00'
+          before: '07:30:00'
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - sun
+        - condition: time
+          after: '00:00:30'
+          before: '09:00:00'
+          weekday:
+            - sat
+            - sun
+    action:
+      service: light.turn_off
+      entity_id: light.korridoren
+
+##############
+## Entrance ##
+##############
+## Entrance light on when door is unlocked at nighttime
+  - alias: 'Entrance night light on'
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.ytterdorr
+        to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: light.entren
+          state: 'off'
+        - condition: or
+          conditions:
+            - condition: sun
+              before: sunrise
+            - condition: sun
+              after: sunset
+        #- condition: or
+        #  conditions:
+        #  - condition: time
+        #    after: '22:30:00'
+        #    before: '07:30:00'
+        #    weekday:
+        #      - mon
+        #      - tue
+        #      - wed
+        #      - thu
+        #      - sun
+        #  - condition: time
+        #    after: '00:00:30'
+        #    before: '09:00:00'
+        #    weekday:
+        #      - sat
+        #      - sun
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.entren
+          brightness: 10
+          color_temp: 454
+
+## Entrance light off after 10 minutes when door is locked at nighttime
+  - alias: 'Entrance night light off'
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.ytterdorr
+        to: 'off'
+        for:
+          minutes: 10
+          seconds: 00
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: light.entren
+          state: 'on'
+        - condition: or
+          conditions:
+            - condition: sun
+              before: sunrise
+            - condition: sun
+              after: sunset
+        #- condition: or
+        #  conditions:
+        #  - condition: time
+        #    after: '22:30:00'
+        #    before: '07:30:00'
+        #    weekday:
+        #      - mon
+        #      - tue
+        #      - wed
+        #      - thu
+        #      - sun
+        #  - condition: time
+        #    after: '00:00:30'
+        #    before: '09:00:00'
+        #    weekday:
+        #      - sat
+        #      - sun
+    action:
+      service: light.turn_off
+      entity_id: light.entren

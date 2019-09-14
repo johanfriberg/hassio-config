@@ -1,0 +1,148 @@
+###########################################
+# lights_at_dark
+#    Contains automations for turning on
+#    lights based on sunset.
+###########################################
+
+#############
+## Bedroom ##
+#############
+## Turn on bedroom window light at sunset
+  - alias: Bedroom light on at sunset
+    initial_state: 'on'
+    trigger:
+      platform: numeric_state
+      entity_id: sun.sun
+      value_template: '{{ state.attributes.elevation }}'
+      below: -1.5
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          before: '21:40:00'
+        - condition: state
+          entity_id: light.bed_headboard
+          state: 'off'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.sovrum_fonster_switch
+
+#################
+## Living area ##
+#################
+## Turn on lights at sunset
+  - alias: Window lights on at sunset
+    initial_state: 'on'
+    trigger:
+      platform: numeric_state
+      entity_id: sun.sun
+      value_template: '{{ state.attributes.elevation }}'
+      below: -1.5
+    condition:
+      condition: or
+      conditions:
+        - condition: time
+          before: '22:00:00'
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - sun
+        - condition: time
+          before: '23:59:00'
+          weekday:
+            - fri
+            - sat
+    action:
+      - service: switch.turn_on
+        entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
+
+## Turn on lights in the morning
+  - alias: Window lights on in the morning
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '07:30:00'
+      - platform: time
+        at: '08:00:00'
+    condition:
+      condition: numeric_state
+      entity_id: sun.sun
+      value_template: '{{ state.attributes.elevation }}'
+      below: -1.5
+    action:
+      - service: switch.turn_on
+        entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
+
+## Turn off lights in the evening
+  - alias: Window lights off in the evening
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '22:30:00'
+      - platform: time
+        at: '00:01:00'
+    condition:
+      condition: or
+      conditions:
+        - condition: time
+          after: '22:29:30'
+          before: '22:30:30'
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - sun
+        - condition: time
+          after: '00:00:30'
+          before: '00:01:30'
+          weekday:
+            - sat
+            - sun
+    action:
+      - service: switch.turn_off
+        entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
+
+## Turn off lights in the morning
+  - alias: Window lights off in the morning
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: '{{ state.attributes.elevation }}'
+        above: -1.5
+#      - platform: time
+#        at: '07:30:00'
+#      - platform: time
+#        at: '09:00:00'
+#    condition:
+#      condition: sun
+#      after: sunrise
+# Presence detection should be added as condition.
+# If no one is at home the lights should turn of at a certain time.
+#      condition: and
+#      conditions:
+#        - condition: sun
+#          after: sunrise
+#        - condition: or
+#          conditions:
+#            - condition: time
+#              after: '07:25:00'
+#              before: '07:35:00'
+#              weekday:
+#                - mon
+#                - tue
+#                - wed
+#                - thu
+#                - fri
+#            - condition: time
+#              after: '08:55:00'
+#              before: '09:05:00'
+#              weekday:
+#                - sat
+#                - sun
+    action:
+      - service: switch.turn_off
+        entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch, switch.sovrum_fonster_switch
