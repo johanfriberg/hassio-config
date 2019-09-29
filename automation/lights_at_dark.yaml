@@ -57,6 +57,10 @@
     action:
       - service: switch.turn_on
         entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
+      - service: light.turn_on
+        data:
+          entity_id: light.vardagsrum_fonster
+          brightness: 113
 
 ## Turn on lights in the morning
   - alias: Window lights on in the morning
@@ -74,6 +78,10 @@
     action:
       - service: switch.turn_on
         entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
+      - service: light.turn_on
+        data:
+          entity_id: light.vardagsrum_fonster
+          brightness: 113
 
 ## Turn off lights in the evening
   - alias: Window lights off in the evening
@@ -104,6 +112,8 @@
     action:
       - service: switch.turn_off
         entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
+      - service: light.turn_off
+        entity_id: light.vardagsrum_fonster
 
 ## Turn off lights in the morning
   - alias: Window lights off in the morning
@@ -146,3 +156,5 @@
     action:
       - service: switch.turn_off
         entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch, switch.sovrum_fonster_switch
+      - service: light.turn_off
+        entity_id: light.vardagsrum_fonster
