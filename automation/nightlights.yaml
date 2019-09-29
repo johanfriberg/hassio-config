@@ -84,7 +84,7 @@
             - thu
             - sun
         - condition: time
-          after: 23:00:00'
+          after: '23:00:00'
           before: '09:00:00'
           weekday:
             - fri
