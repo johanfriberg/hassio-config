@@ -29,7 +29,7 @@
         - condition: or
           conditions:
           - condition: time
-            after: '22:30:00'
+            after: '22:00:00'
             before: '07:30:00'
             weekday:
               - mon
@@ -38,11 +38,11 @@
               - thu
               - sun
           - condition: time
-            after: '00:00:30'
+            after: '23:00:00'
             before: '09:00:00'
             weekday:
+              - fri
               - sat
-              - sun
     action:
       - service: light.turn_on
         data:
@@ -75,7 +75,7 @@
       - condition: or
         conditions:
         - condition: time
-          after: '22:30:00'
+          after: '22:00:00'
           before: '07:30:00'
           weekday:
             - mon
@@ -84,11 +84,11 @@
             - thu
             - sun
         - condition: time
-          after: '00:00:30'
+          after: 23:00:00'
           before: '09:00:00'
           weekday:
+            - fri
             - sat
-            - sun
     action:
       service: light.turn_off
       entity_id: light.korridoren
