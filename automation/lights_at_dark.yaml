@@ -60,28 +60,45 @@
       - service: light.turn_on
         data:
           entity_id: light.vardagsrum_fonster
-          brightness: 113
+          brightness: 93
 
 ## Turn on lights in the morning
   - alias: Window lights on in the morning
     initial_state: 'on'
     trigger:
       - platform: time
-        at: '07:30:00'
+        at: '05:00:00'
       - platform: time
-        at: '08:00:00'
+        at: '06:00:00'
     condition:
-      condition: numeric_state
-      entity_id: sun.sun
-      value_template: '{{ state.attributes.elevation }}'
-      below: -1.5
+      condition: and
+      conditions:
+        - condition: numeric_state
+          entity_id: sun.sun
+          value_template: '{{ state.attributes.elevation }}'
+          below: -1.5
+        - condition: or
+          conditions:
+            - condition: time
+              before: '05:01:00'
+              weekday:
+                - mon
+                - tue
+                - wen
+                - thu
+                - fri
+            - condition: time
+              after: '05:59:00'
+              weekday:
+                - sat
+                - sun
     action:
       - service: switch.turn_on
         entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
       - service: light.turn_on
         data:
           entity_id: light.vardagsrum_fonster
-          brightness: 113
+          brightness: 93
 
 ## Turn off lights in the evening
   - alias: Window lights off in the evening
