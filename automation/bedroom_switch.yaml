@@ -1,0 +1,45 @@
+###########################################
+# bedroom_switch
+#    Contains automations for bedroom
+#    switch.
+###########################################
+
+# Turn on bed headboard light
+  - alias: Turn on bed headboard light
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: sovrumsknapp
+        event: 1002 # single click
+    condition:
+      condition: state
+      entity_id: light.bed_headboard
+      state: 'off'
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.bed_headboard
+          brightness: 13
+          color_temp: 474
+          xy_color: '[0.5151, 0.4148]'
+
+# Turn off bed headboard light
+  - alias: Turn on bed headboard light
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: sovrumsknapp
+        event: 1002 # single click
+    condition:
+      condition: state
+      entity_id: light.bed_headboard
+      state: 'on'
+    action:
+      - service: light.turn_off
+        entity_id: light.bed_headboard
+
+# Activate night scene
