@@ -84,7 +84,7 @@
               weekday:
                 - mon
                 - tue
-                - wen
+                - wed
                 - thu
                 - fri
             - condition: time
