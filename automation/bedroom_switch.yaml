@@ -22,7 +22,7 @@
         data:
           entity_id: light.bed_headboard
           brightness: 13
-          xy_color: '[0.5151, 0.4148]'
+          xy_color: [0.5151, 0.4148]
 
 # Turn off bed headboard light
   - alias: Turn on bed headboard light
