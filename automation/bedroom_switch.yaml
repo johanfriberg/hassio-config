@@ -22,7 +22,6 @@
         data:
           entity_id: light.bed_headboard
           brightness: 13
-          color_temp: 474
           xy_color: '[0.5151, 0.4148]'
 
 # Turn off bed headboard light
