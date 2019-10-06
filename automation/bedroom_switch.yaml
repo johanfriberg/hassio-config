@@ -42,3 +42,14 @@
         entity_id: light.bed_headboard
 
 # Activate night scene
+  - alias: Activate night scene on buttonclick
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: sovrumsknapp
+        event: 1004 # doble click
+    action:
+      - service: scene.turn_on
+        entity_id: scene.night_scene
