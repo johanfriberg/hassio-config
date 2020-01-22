@@ -55,12 +55,13 @@
             - fri
             - sat
     action:
-      - service: switch.turn_on
-        entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
       - service: light.turn_on
         data:
           entity_id: light.vardagsrum_fonster
-          brightness: 93
+          brightness: 73
+      - service: light.turn_on
+        data:
+          entity_id: light.koket_fonster
 
 ## Turn on lights in the morning
   - alias: Window lights on in the morning
@@ -93,12 +94,13 @@
                 - sat
                 - sun
     action:
-      - service: switch.turn_on
-        entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
       - service: light.turn_on
         data:
           entity_id: light.vardagsrum_fonster
-          brightness: 93
+          brightness: 73
+      - service: light.turn_on
+        data:
+          entity_id: light.koket_fonster
 
 ## Turn off lights in the evening
   - alias: Window lights off in the evening
@@ -127,10 +129,8 @@
             - sat
             - sun
     action:
-      - service: switch.turn_off
-        entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch
       - service: light.turn_off
-        entity_id: light.vardagsrum_fonster
+        entity_id: light.vardagsrum_fonster, light.koket_fonster
 
 ## Turn off lights in the morning
   - alias: Window lights off in the morning
@@ -172,6 +172,6 @@
 #                - sun
     action:
       - service: switch.turn_off
-        entity_id: switch.kok_fonster_switch, switch.vardagsrum_fonster_switch, switch.sovrum_fonster_switch
+        entity_id: switch.sovrum_fonstret
       - service: light.turn_off
-        entity_id: light.vardagsrum_fonster
+        entity_id: light.vardagsrum_fonster, light.koket_fonster
