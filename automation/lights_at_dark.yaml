@@ -19,13 +19,13 @@
       condition: and
       conditions:
         - condition: time
-          before: '21:40:00'
+          before: '21:00:00'
         - condition: state
           entity_id: light.bed_headboard
           state: 'off'
     action:
       - service: switch.turn_on
-        entity_id: switch.sovrum_fonster_switch
+        entity_id: switch.sovrum_fonstret
 
 #################
 ## Living area ##

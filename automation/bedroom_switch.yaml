@@ -23,9 +23,11 @@
           entity_id: light.bed_headboard
           brightness: 13
           xy_color: [0.5151, 0.4148]
+      - service: switch.turn_off
+        entity_id: switch.sovrum_fonstret
 
 # Turn off bed headboard light
-  - alias: Turn on bed headboard light
+  - alias: Turn off bed headboard light
     initial_state: 'on'
     trigger:
       platform: event
@@ -40,6 +42,8 @@
     action:
       - service: light.turn_off
         entity_id: light.bed_headboard
+      - service: switch.turn_off
+        entity_id: switch.sovrum_fonstret
 
 # Activate night scene
   - alias: Activate night scene on buttonclick
