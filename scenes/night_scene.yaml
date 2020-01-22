@@ -1,4 +1,4 @@
 - name: Nattläge
   entities:
-    group.all_lights:
-      state: off
+    light.all:
+       state: off
