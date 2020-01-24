@@ -62,6 +62,7 @@
       - service: light.turn_on
         data:
           entity_id: light.koket_fonster
+          brightness: 52
 
 ## Turn on lights in the morning
   - alias: Window lights on in the morning
@@ -101,6 +102,7 @@
       - service: light.turn_on
         data:
           entity_id: light.koket_fonster
+          brightness: 52
 
 ## Turn off lights in the evening
   - alias: Window lights off in the evening
