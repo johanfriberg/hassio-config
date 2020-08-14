@@ -95,7 +95,7 @@ logbook:
 # Enables support for tracking state changes over time.
 recorder:
   # Delete events and states older than 1 week
-  purge_interval: 2
+  #purge_interval: 2
   purge_keep_days: 7
 
 # Set severity level for log
