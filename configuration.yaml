@@ -128,9 +128,9 @@ device_tracker:
 # Track the sun
 sun:
 
-weather:
-  - platform: smhi
-    name: Kungsbacka
+#weather:
+#  - platform: smhi
+#    name: Kungsbacka
 
 sensor:
   # Weather prediction
