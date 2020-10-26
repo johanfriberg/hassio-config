@@ -132,9 +132,9 @@ sun:
 #  - platform: smhi
 #    name: Kungsbacka
 
-sensor:
+#sensor:
   # Weather prediction
-  - platform: yr
+#  - platform: yr
 
 ##########
 # Timers #
