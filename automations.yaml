@@ -1,1 +1,53 @@
-[]
+- id: '1672663469989'
+  alias: 'Bedroom Light: increase brightness'
+  description: Increase brightness of bedroom light
+  trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: switch_sovrum
+      event: 1001
+    id: _action_hold_button
+  action:
+  - repeat:
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: 5
+          transition: '1'
+        target:
+          entity_id: light.sovrum_taklampa
+      - wait_for_trigger:
+          platform: event
+          event_type: deconz_event
+          event_data:
+            id: switch_sovrum
+            event: 1003
+        timeout:
+          seconds: 1
+      - delay:
+          seconds: '1'
+      until:
+        condition:
+        - or:
+          - condition: template
+            value_template: '{{ not is_state(''wait.trigger'', ''none'') }}'
+          - condition: numeric_state
+            entity_id: light.sovrum_taklampa
+            attribute: brightness
+            above: 100
+  initial_state: 'on'
+- id: '1672836030891'
+  alias: Turn off all lights
+  description: Turn off all lights on bead headboard switch doubleclick
+  trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: sovrumsknapp
+      event: 1004
+  action:
+  - service: light.turn_off
+    entity_id: all
+  initial_state: 'on'
+  mode: single
