@@ -45,7 +45,15 @@ zeroconf:
 tts:
   - platform: google_translate
 
+################################
+# Enable use of helpers in GUI #
+################################
 input_boolean:
+input_text:
+input_button:
+input_datetime:
+input_number:
+input_select:
 
 ##################################
 # Logging and history components #
