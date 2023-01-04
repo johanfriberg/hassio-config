@@ -45,19 +45,7 @@ zeroconf:
 tts:
   - platform: google_translate
 
-###########################
-# Show switches as lights #
-###########################
-#light:
-#  - platform: switch
-#    name: Vardagsrum Fönster
-#    entity_id: switch.vardagsrum_fonster_switch
-#  - platform: switch
-#    name: Kök Fönster
-#    entity_id: switch.kok_fonster_switch
-#  - platform: switch
-#    name: Sovrum Fönster
-#    entity_id: switch.sovrum_fonster_switch
+input_boolean:
 
 ##################################
 # Logging and history components #
@@ -123,9 +111,9 @@ sun:
 # Timers #
 ##########
 # Timer for coffe maker, used in kaffetimer.yaml
-timer:
-  kaffetimer:
-    duration: '00:45:00'
+#timer:
+#  kaffetimer:
+#    duration: '00:45:00'
 
 group: !include groups.yaml
 automation: !include automations.yaml
