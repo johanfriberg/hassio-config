@@ -13,6 +13,7 @@ ip_bans.yaml
 .storage
 .cloud
 .google.token
+.ssh
 
 # Include directories
 !automation
