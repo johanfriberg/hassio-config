@@ -1,0 +1,49 @@
+###########################################
+# outdoot_lights
+#    Contains automations for outdoor
+#    lights.
+###########################################
+
+# Turn on outdoor light in the morning
+
+# Turn on outdoor light in the evening
+
+# Turn off outdoor light in the morning
+
+# Turn off outdoor light in the evening
+  - id: outdoor_ligths_off_in_the_evening
+    alias: Outdoor lights off in the evening
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '22:30:00'
+        id: "early_trigger"
+      - platform: time
+        at: '00:30:00'
+        id: 'late_trigger'
+    condition:
+      condition: or
+      conditions:
+        - condition: and
+          conditions:
+            - condition: time
+              weekday:
+                - mon
+                - tue
+                - wed
+                - thu
+                - sun
+            - condition: trigger
+              id: "early_trigger"
+        - condition: and
+          conditions:
+            - condition: time
+              weekday:
+                - fri
+                - sat
+            - condition: trigger
+              id: "late_trigger"
+    action:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.plug_utomhus_switch_2
